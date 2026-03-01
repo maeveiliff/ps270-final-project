@@ -12,3 +12,12 @@ output:
 ## Project thoughts
 
 I am interested in exploring data related to swing and battleground states. I am from Minnesota, which is the longest-standing "blue" state since 1976. But now I live in a key swing state- Wisconsin being a huge factor in presidential election victories. I want to look into data about what factors leads states to swing certain ways and how it changes across elections. I would like to look into candidate's platforms over the recent presidential elections, as well as geographic and demographic elements as well. Ultimately, the goal of the final project would be to get some sort of insight into what factors contribute to battleground states voting the way they do depending on the election year. 
+
+
+## Research Proposal 
+
+My research question is: How do the current state demographics and economics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels, racial demographics, geographic location changes/movement, and the state of the economy all determine which party is expected to win in a swing state. More education, diversity, urbanization, and economic grounding leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates), percent/number of non-white voters in the state, distribution of populations is urban and rural areas, and average household incomes or unemployment rates to look at the economic shifts. I want to look at the variation and how they have changed in comparison to which party won the state's electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.  
+
+
+
+
