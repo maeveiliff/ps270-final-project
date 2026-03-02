@@ -16,7 +16,34 @@ I am interested in exploring data related to swing and battleground states. I am
 
 ## Research Proposal 
 
-My research question is: How do the current state demographics and economics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels, racial demographics, geographic location changes/movement, and the state of the economy all determine which party is expected to win in a swing state. More education, diversity, urbanization, and economic grounding leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates), percent/number of non-white voters in the state, distribution of populations is urban and rural areas, and average household incomes or unemployment rates to look at the economic shifts. I want to look at the variation and how they have changed in comparison to which party won the state's electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.  
+My research question is: How do the current state demographics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels, racial demographics, and geographic changes/movement determine which party is expected to win in a swing state. More education, diversity, and urbanization leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates), percent/number of non-white voters in the state, and distribution of populations is urban and rural areas. I want to look at the variation and how they have changed in comparison to which party won the state's electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.  
+
+
+## Code for Data to be Used in Project
+
+
+I installed the tidycensus package to get the data for education, racial demography, and urbanization to compare across US censuses
+
+```{r}
+library(tidycensus)
+```
+
+
+Then I loaded data about voting by county to compare with my census data 
+
+```{r}
+
+library(tidyverse)
+
+prescountydata <- read_csv("data/countypres_2000-2024.csv")
+
+prescountydata
+
+glimpse(prescountydata)
+
+```
+
+
 
 
 

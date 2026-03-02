@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/countypres_2000-2024.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1547,8 +1547,58 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="project-thoughts">Project thoughts</h2>
 <p>I am interested in exploring data related to swing and battleground states. I am from Minnesota, which is the longest-standing “blue” state since 1976. But now I live in a key swing state- Wisconsin being a huge factor in presidential election victories. I want to look into data about what factors leads states to swing certain ways and how it changes across elections. I would like to look into candidate’s platforms over the recent presidential elections, as well as geographic and demographic elements as well. Ultimately, the goal of the final project would be to get some sort of insight into what factors contribute to battleground states voting the way they do depending on the election year.</p>
 <h2 id="research-proposal">Research Proposal</h2>
-<p>My research question is: How do the current state demographics and economics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels, racial demographics, geographic location changes/movement, and the state of the economy all determine which party is expected to win in a swing state. More education, diversity, urbanization, and economic grounding leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates), percent/number of non-white voters in the state, distribution of populations is urban and rural areas, and average household incomes or unemployment rates to look at the economic shifts. I want to look at the variation and how they have changed in comparison to which party won the state’s electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>My research question is: How do the current state demographics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels, racial demographics, and geographic changes/movement determine which party is expected to win in a swing state. More education, diversity, and urbanization leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates), percent/number of non-white voters in the state, and distribution of populations is urban and rural areas. I want to look at the variation and how they have changed in comparison to which party won the state’s electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.</p>
+<h2 id="code-for-data-to-be-used-in-project">Code for Data to be Used in Project</h2>
+<p>I installed the tidycensus package to get the data for education, racial demography, and urbanization to compare across US censuses</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://walker-data.com/tidycensus/'>tidycensus</a></span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>Then I loaded data about voting by county to compare with my census data</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>prescountydata</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readr.tidyverse.org/reference/read_delim.html'>read_csv</a></span><span class='op'>(</span><span class='st'>"data/countypres_2000-2024.csv"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>prescountydata</span></span></code></pre>
+</div>
+<pre><code># A tibble: 94,151 × 12
+   state county_name  year state_po county_fips office candidate party
+   &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;
+ 1 ALAB… AUTAUGA      2024 AL              1001 US PR… OTHER     OTHER
+ 2 ALAB… AUTAUGA      2024 AL              1001 US PR… CHASE OL… LIBE…
+ 3 ALAB… AUTAUGA      2024 AL              1001 US PR… KAMALA D… DEMO…
+ 4 ALAB… AUTAUGA      2024 AL              1001 US PR… DONALD J… REPU…
+ 5 ALAB… BALDWIN      2024 AL              1003 US PR… OTHER     OTHER
+ 6 ALAB… BALDWIN      2024 AL              1003 US PR… DONALD J… REPU…
+ 7 ALAB… BALDWIN      2024 AL              1003 US PR… KAMALA D… DEMO…
+ 8 ALAB… BALDWIN      2024 AL              1003 US PR… CHASE OL… LIBE…
+ 9 ALAB… BARBOUR      2024 AL              1005 US PR… DONALD J… REPU…
+10 ALAB… BARBOUR      2024 AL              1005 US PR… KAMALA D… DEMO…
+# ℹ 94,141 more rows
+# ℹ 4 more variables: candidatevotes &lt;dbl&gt;, totalvotes &lt;dbl&gt;,
+#   version &lt;dbl&gt;, mode &lt;chr&gt;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://pillar.r-lib.org/reference/glimpse.html'>glimpse</a></span><span class='op'>(</span><span class='va'>prescountydata</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>Rows: 94,151
+Columns: 12
+$ state          &lt;chr&gt; &quot;ALABAMA&quot;, &quot;ALABAMA&quot;, &quot;ALABAMA&quot;, &quot;ALABAMA&quot;, &quot;…
+$ county_name    &lt;chr&gt; &quot;AUTAUGA&quot;, &quot;AUTAUGA&quot;, &quot;AUTAUGA&quot;, &quot;AUTAUGA&quot;, &quot;…
+$ year           &lt;dbl&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 202…
+$ state_po       &lt;chr&gt; &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL&quot;, &quot;AL…
+$ county_fips    &lt;dbl&gt; 1001, 1001, 1001, 1001, 1003, 1003, 1003, 100…
+$ office         &lt;chr&gt; &quot;US PRESIDENT&quot;, &quot;US PRESIDENT&quot;, &quot;US PRESIDENT…
+$ candidate      &lt;chr&gt; &quot;OTHER&quot;, &quot;CHASE OLIVER&quot;, &quot;KAMALA D HARRIS&quot;, &quot;…
+$ party          &lt;chr&gt; &quot;OTHER&quot;, &quot;LIBERTARIAN&quot;, &quot;DEMOCRAT&quot;, &quot;REPUBLIC…
+$ candidatevotes &lt;dbl&gt; 293, 65, 7439, 20484, 1276, 95798, 24934, 241…
+$ totalvotes     &lt;dbl&gt; 28281, 28281, 28281, 28281, 122249, 122249, 1…
+$ version        &lt;dbl&gt; 20260225, 20260225, 20260225, 20260225, 20260…
+$ mode           &lt;chr&gt; &quot;TOTAL&quot;, &quot;TOTAL&quot;, &quot;TOTAL&quot;, &quot;TOTAL&quot;, &quot;TOTAL&quot;, …</code></pre>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
