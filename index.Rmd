@@ -45,6 +45,79 @@ glimpse(prescountydata)
 
 
 
+## Data Visualization for Milestone 3
+
+I created a variable for all the swing states: Wisconsin, Michigan, Pennsylvania, Arizona, Georgia, Nevada, and North Carolina. Then I filtered into to data from swing states just in the year 2020. Lastly I filtered the 2020 swing state variable for democrat votes to be able to find the percentage of democrat votes in the total votes to use later in my data visualization. 
+
+```{r}
+
+swing_states <- c("WI", "MI", "PA", "AZ", "GA", "NV", "NC")
+
+swing_2020 <- prescountydata |>
+  filter(state_po %in% swing_states, year == 2020)
+
+swing_2020 <- swing_2020 |>
+  group_by(state_po, county_name) |>
+  mutate(demvotes = sum(if_else(party == "DEMOCRAT", candidatevotes, 0))) |>
+  mutate(demvoteshare = demvotes / totalvotes)
+
+```
+
+I looked into my tidycensus package to see all the avaliable functions within the package. I was able to use the get_acs() function to download data in each swing state county for people with a bachelor's degree (education) in 2020. Next, I matched county names to election data. Lastly, I needed to combine my swing_2020 variable data with the education data I just created and make sure everything was filtered by county for a more percise data visualization. 
+
+```{r}
+
+library(tidycensus)
+ls("package:tidycensus")
+
+acs_variables2020 <- load_variables(2020, "acs5")
+head(acs_variables2020)
+
+education <- get_acs(
+  geography = "county", 
+  state = swing_states, 
+  variables = "B15003_022", 
+  year = 2020)
+
+
+education$county_name <- gsub(" County,.*", "", education$NAME)
+education$county_name <- toupper(education$county_name)
+
+swing2020_education <- merge(swing_2020, education, by = "county_name")
+
+
+```
+
+
+
+Lastly, I created a scatterplot to showcase my data to find a correlation between education and democratic votes in the counties of swing states. 
+
+
+```{r}
+
+swing2020_education_plot <- ggplot(swing2020_education, aes(x = estimate /1000, y = demvoteshare, color = state_po)) +
+  geom_point(size = 1, alpha = 0.5) +
+  geom_smooth(method = "lm", se= FALSE, color = "red") +
+  scale_x_log10() +
+  labs(
+    x = "Number of Bachelor Degree Graduates in the Thousands", 
+    y = "Democratic Vote Share", 
+    title = "Education and Democratic Vote Share in Swing States (2020)", 
+    color = "Swing State"
+  )
+
+swing2020_education_plot
+
+
+
+```
+
+
+## AI Disclosure Statement 
+
+I used ChatGPT a couple times to create this data visualization. In my second chunk of code in focusing on the education variable, I was confused how to use the tidycensus library and all that code, so I inputed in to ChatGPT to ask to read it to find the names of data I wanted to use (for example that the average education is called estimate) because tidycensus takes data from the US census website so it is accissible that way. I looked up questions like "how to match my election data to the county data" and ChatGPT told me to use gsub and toupper, which I hadn't heard of before. I also asked it how to see the functions within the tidycensus library and it showed me the head() function and to use asc5 and to narrow down on 2020 and other variables specific to the census data. 
+
+
 
 
 
