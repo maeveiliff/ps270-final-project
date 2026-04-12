@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["data/countypres_2000-2024.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["data/countypres_2000-2024.csv","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-5-1.png","index_files/figure-html5/unnamed-chunk-6-1.png","index_files/figure-html5/unnamed-chunk-7-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1547,9 +1547,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="project-thoughts">Project thoughts</h2>
 <p>I am interested in exploring data related to swing and battleground states. I am from Minnesota, which is the longest-standing “blue” state since 1976. But now I live in a key swing state- Wisconsin being a huge factor in presidential election victories. I want to look into data about what factors leads states to swing certain ways and how it changes across elections. I would like to look into candidate’s platforms over the recent presidential elections, as well as geographic and demographic elements as well. Ultimately, the goal of the final project would be to get some sort of insight into what factors contribute to battleground states voting the way they do depending on the election year.</p>
 <h2 id="research-proposal">Research Proposal</h2>
-<p>My research question is: How do the current state demographics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels, racial demographics, and geographic changes/movement determine which party is expected to win in a swing state. More education, diversity, and urbanization leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates), percent/number of non-white voters in the state, and distribution of populations is urban and rural areas. I want to look at the variation and how they have changed in comparison to which party won the state’s electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.</p>
+<p>My research question is: How do the current state education statistics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels determine which party is expected to win in a swing state. More education leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates). I want to look at the variation and how they have changed in comparison to which party won the state’s electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.</p>
 <h2 id="code-for-data-to-be-used-in-project">Code for Data to be Used in Project</h2>
-<p>I installed the tidycensus package to get the data for education, racial demography, and urbanization to compare across US censuses</p>
+<p>I installed the tidycensus package to get the data for education to compare across US censuses</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://walker-data.com/tidycensus/'>tidycensus</a></span><span class='op'>)</span></span></code></pre>
@@ -1641,17 +1641,17 @@ $ mode           &lt;chr&gt; &quot;TOTAL&quot;, &quot;TOTAL&quot;, &quot;TOTAL&q
 5 B01001A_005 Estimate!!Total:!!Male:!!10 to 14 yea… SEX BY… tract    
 6 B01001A_006 Estimate!!Total:!!Male:!!15 to 17 yea… SEX BY… tract    </code></pre>
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>education</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://walker-data.com/tidycensus/reference/get_acs.html'>get_acs</a></span><span class='op'>(</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>education_2020</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://walker-data.com/tidycensus/reference/get_acs.html'>get_acs</a></span><span class='op'>(</span></span>
 <span>  geography <span class='op'>=</span> <span class='st'>"county"</span>, </span>
 <span>  state <span class='op'>=</span> <span class='va'>swing_states</span>, </span>
 <span>  variables <span class='op'>=</span> <span class='st'>"B15003_022"</span>, </span>
 <span>  year <span class='op'>=</span> <span class='fl'>2020</span><span class='op'>)</span></span>
 <span></span>
 <span></span>
-<span><span class='va'>education</span><span class='op'>$</span><span class='va'>county_name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span><span class='op'>(</span><span class='st'>" County,.*"</span>, <span class='st'>""</span>, <span class='va'>education</span><span class='op'>$</span><span class='va'>NAME</span><span class='op'>)</span></span>
-<span><span class='va'>education</span><span class='op'>$</span><span class='va'>county_name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>toupper</a></span><span class='op'>(</span><span class='va'>education</span><span class='op'>$</span><span class='va'>county_name</span><span class='op'>)</span></span>
+<span><span class='va'>education_2020</span><span class='op'>$</span><span class='va'>county_name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span><span class='op'>(</span><span class='st'>" County,.*"</span>, <span class='st'>""</span>, <span class='va'>education_2020</span><span class='op'>$</span><span class='va'>NAME</span><span class='op'>)</span></span>
+<span><span class='va'>education_2020</span><span class='op'>$</span><span class='va'>county_name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>toupper</a></span><span class='op'>(</span><span class='va'>education_2020</span><span class='op'>$</span><span class='va'>county_name</span><span class='op'>)</span></span>
 <span></span>
-<span><span class='va'>swing2020_education</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>swing_2020</span>, <span class='va'>education</span>, by <span class='op'>=</span> <span class='st'>"county_name"</span><span class='op'>)</span></span></code></pre>
+<span><span class='va'>swing2020_education</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>swing_2020</span>, <span class='va'>education_2020</span>, by <span class='op'>=</span> <span class='st'>"county_name"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <p>Lastly, I created a scatterplot to showcase my data to find a correlation between education and democratic votes in the counties of swing states.</p>
@@ -1659,7 +1659,7 @@ $ mode           &lt;chr&gt; &quot;TOTAL&quot;, &quot;TOTAL&quot;, &quot;TOTAL&q
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>swing2020_education_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>swing2020_education</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>estimate</span> <span class='op'>/</span><span class='fl'>1000</span>, y <span class='op'>=</span> <span class='va'>demvoteshare</span>, color <span class='op'>=</span> <span class='va'>state_po</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>1</span>, alpha <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se<span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"red"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se<span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"blue"</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
 <span>    x <span class='op'>=</span> <span class='st'>"Number of Bachelor Degree Graduates in the Thousands"</span>, </span>
@@ -1672,9 +1672,171 @@ $ mode           &lt;chr&gt; &quot;TOTAL&quot;, &quot;TOTAL&quot;, &quot;TOTAL&q
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" alt="" width="624" /></p>
 </div>
-<h2 id="ai-disclosure-statement">AI Disclosure Statement</h2>
+<h3 id="ai-disclosure-statement">AI Disclosure Statement</h3>
 <p>I used ChatGPT a couple times to create this data visualization. In my second chunk of code in focusing on the education variable, I was confused how to use the tidycensus library and all that code, so I inputed in to ChatGPT to ask to read it to find the names of data I wanted to use (for example that the average education is called estimate) because tidycensus takes data from the US census website so it is accissible that way. I looked up questions like “how to match my election data to the county data” and ChatGPT told me to use gsub and toupper, which I hadn’t heard of before. I also asked it how to see the functions within the tidycensus library and it showed me the head() function and to use asc5 and to narrow down on 2020 and other variables specific to the census data.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h2 id="data-comparison-and-analysis-for-milestone-4">Data Comparison and Analysis for Milestone 4</h2>
+<h3 id="data-visualization-comparisons">Data Visualization Comparisons</h3>
+<p>Next, I will compare the education and democratic vote share in swing states to 2016 data, when a republic president (Donald Trump) was elected by doing the exact steps I followed to create my data visualization for 2020.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>swing_2016</span> <span class='op'>&lt;-</span> <span class='va'>prescountydata</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>state_po</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>swing_states</span>, <span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2016</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>swing_2016</span> <span class='op'>&lt;-</span> <span class='va'>swing_2016</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>state_po</span>, <span class='va'>county_name</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>demvotes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>party</span> <span class='op'>==</span> <span class='st'>"DEMOCRAT"</span>, <span class='va'>candidatevotes</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>demvoteshare <span class='op'>=</span> <span class='va'>demvotes</span> <span class='op'>/</span> <span class='va'>totalvotes</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span><span class='va'>acs_variables2016</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://walker-data.com/tidycensus/reference/load_variables.html'>load_variables</a></span><span class='op'>(</span><span class='fl'>2016</span>, <span class='st'>"acs5"</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>acs_variables2016</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code># A tibble: 6 × 4
+  name        label                                concept   geography
+  &lt;chr&gt;       &lt;chr&gt;                                &lt;chr&gt;     &lt;chr&gt;    
+1 B00001_001  Estimate!!Total                      UNWEIGHT… block gr…
+2 B00002_001  Estimate!!Total                      UNWEIGHT… block gr…
+3 B01001A_001 Estimate!!Total                      SEX BY A… tract    
+4 B01001A_002 Estimate!!Total!!Male                SEX BY A… tract    
+5 B01001A_003 Estimate!!Total!!Male!!Under 5 years SEX BY A… tract    
+6 B01001A_004 Estimate!!Total!!Male!!5 to 9 years  SEX BY A… tract    </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>education_2016</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://walker-data.com/tidycensus/reference/get_acs.html'>get_acs</a></span><span class='op'>(</span></span>
+<span>  geography <span class='op'>=</span> <span class='st'>"county"</span>, </span>
+<span>  state <span class='op'>=</span> <span class='va'>swing_states</span>, </span>
+<span>  variables <span class='op'>=</span> <span class='st'>"B15003_022"</span>, </span>
+<span>  year <span class='op'>=</span> <span class='fl'>2016</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span><span class='va'>education_2016</span><span class='op'>$</span><span class='va'>county_name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span><span class='op'>(</span><span class='st'>" County,.*"</span>, <span class='st'>""</span>, <span class='va'>education_2016</span><span class='op'>$</span><span class='va'>NAME</span><span class='op'>)</span></span>
+<span><span class='va'>education_2016</span><span class='op'>$</span><span class='va'>county_name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>toupper</a></span><span class='op'>(</span><span class='va'>education_2016</span><span class='op'>$</span><span class='va'>county_name</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>swing2016_education</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>swing_2016</span>, <span class='va'>education_2016</span>, by <span class='op'>=</span> <span class='st'>"county_name"</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span><span class='va'>swing2016_education_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>swing2016_education</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>estimate</span> <span class='op'>/</span><span class='fl'>1000</span>, y <span class='op'>=</span> <span class='va'>demvoteshare</span>, color <span class='op'>=</span> <span class='va'>state_po</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>1</span>, alpha <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se<span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"blue"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    x <span class='op'>=</span> <span class='st'>"Number of Bachelor Degree Graduates in the Thousands"</span>, </span>
+<span>    y <span class='op'>=</span> <span class='st'>"Democratic Vote Share"</span>, </span>
+<span>    title <span class='op'>=</span> <span class='st'>"Education and Democratic Vote Share in Swing States (2016)"</span>, </span>
+<span>    color <span class='op'>=</span> <span class='st'>"Swing State"</span></span>
+<span>  <span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>swing2016_education_plot</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-6-1.png" alt="" width="624" /></p>
+</div>
+<p>Then, I will do the same thing, but in 2012 when Barack Obama, the democratic candidate, was elected.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>swing_2012</span> <span class='op'>&lt;-</span> <span class='va'>prescountydata</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>state_po</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='va'>swing_states</span>, <span class='va'>year</span> <span class='op'>==</span> <span class='fl'>2012</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>swing_2012</span> <span class='op'>&lt;-</span> <span class='va'>swing_2012</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>state_po</span>, <span class='va'>county_name</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>demvotes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='va'>party</span> <span class='op'>==</span> <span class='st'>"DEMOCRAT"</span>, <span class='va'>candidatevotes</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>demvoteshare <span class='op'>=</span> <span class='va'>demvotes</span> <span class='op'>/</span> <span class='va'>totalvotes</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span><span class='va'>acs_variables2012</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://walker-data.com/tidycensus/reference/load_variables.html'>load_variables</a></span><span class='op'>(</span><span class='fl'>2012</span>, <span class='st'>"acs5"</span><span class='op'>)</span></span>
+<span><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>acs_variables2012</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code># A tibble: 6 × 4
+  name        label                                concept   geography
+  &lt;chr&gt;       &lt;chr&gt;                                &lt;chr&gt;     &lt;chr&gt;    
+1 B00001_001  Estimate!!Total                      UNWEIGHT… tract    
+2 B00002_001  Estimate!!Total                      UNWEIGHT… tract    
+3 B01001A_001 Estimate!!Total                      SEX BY A… tract    
+4 B01001A_002 Estimate!!Total!!Male                SEX BY A… tract    
+5 B01001A_003 Estimate!!Total!!Male!!Under 5 years SEX BY A… tract    
+6 B01001A_004 Estimate!!Total!!Male!!5 to 9 years  SEX BY A… tract    </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>education_2012</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://walker-data.com/tidycensus/reference/get_acs.html'>get_acs</a></span><span class='op'>(</span></span>
+<span>  geography <span class='op'>=</span> <span class='st'>"county"</span>, </span>
+<span>  state <span class='op'>=</span> <span class='va'>swing_states</span>, </span>
+<span>  variables <span class='op'>=</span> <span class='st'>"B15003_022"</span>, </span>
+<span>  year <span class='op'>=</span> <span class='fl'>2012</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span><span class='va'>education_2012</span><span class='op'>$</span><span class='va'>county_name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span><span class='op'>(</span><span class='st'>" County,.*"</span>, <span class='st'>""</span>, <span class='va'>education_2012</span><span class='op'>$</span><span class='va'>NAME</span><span class='op'>)</span></span>
+<span><span class='va'>education_2012</span><span class='op'>$</span><span class='va'>county_name</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>toupper</a></span><span class='op'>(</span><span class='va'>education_2012</span><span class='op'>$</span><span class='va'>county_name</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>swing2012_education</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/merge.html'>merge</a></span><span class='op'>(</span><span class='va'>swing_2012</span>, <span class='va'>education_2012</span>, by <span class='op'>=</span> <span class='st'>"county_name"</span><span class='op'>)</span></span>
+<span></span>
+<span></span>
+<span><span class='va'>swing2012_education_plot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>swing2012_education</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>estimate</span> <span class='op'>/</span><span class='fl'>1000</span>, y <span class='op'>=</span> <span class='va'>demvoteshare</span>, color <span class='op'>=</span> <span class='va'>state_po</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>1</span>, alpha <span class='op'>=</span> <span class='fl'>0.5</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span><span class='op'>(</span>method <span class='op'>=</span> <span class='st'>"lm"</span>, se<span class='op'>=</span> <span class='cn'>FALSE</span>, color <span class='op'>=</span> <span class='st'>"blue"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_log10</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    x <span class='op'>=</span> <span class='st'>"Number of Bachelor Degree Graduates in the Thousands"</span>, </span>
+<span>    y <span class='op'>=</span> <span class='st'>"Democratic Vote Share"</span>, </span>
+<span>    title <span class='op'>=</span> <span class='st'>"Education and Democratic Vote Share in Swing States (2012)"</span>, </span>
+<span>    color <span class='op'>=</span> <span class='st'>"Swing State"</span></span>
+<span>  <span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>swing2012_education_plot</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-7-1.png" alt="" width="624" /></p>
+</div>
+<p>Next, I put all this data used for the scatterplots into a table with the average numbers of bachelor degrees and average democratic vote shares in the swing states for each election year.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>avgs_2012</span> <span class='op'>&lt;-</span> <span class='va'>swing2012_education</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>avg_bd2012 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>estimate</span> <span class='op'>/</span> <span class='fl'>1000</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>,</span>
+<span>            avg_demvotes2012 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>demvoteshare</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>avgs_2016</span> <span class='op'>&lt;-</span> <span class='va'>swing2016_education</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>avg_bd2016 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>estimate</span> <span class='op'>/</span> <span class='fl'>1000</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, </span>
+<span>            avg_demvotes2016 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>demvoteshare</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>avgs_2020</span> <span class='op'>&lt;-</span> <span class='va'>swing2020_education</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>avg_bd2020 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>estimate</span> <span class='op'>/</span> <span class='fl'>1000</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>, </span>
+<span>            avg_demvotes2020 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>demvoteshare</span>, na.rm <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>avg_table_final</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/bind_cols.html'>bind_cols</a></span><span class='op'>(</span></span>
+<span>  `2012` <span class='op'>=</span> <span class='va'>avgs_2012</span>, `2016` <span class='op'>=</span> <span class='va'>avgs_2016</span>, `2020` <span class='op'>=</span> <span class='va'>avgs_2020</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>avg_table_final</span>, col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Mean BD 2012"</span>, <span class='st'>"Mean Dem Vote 2012"</span>, <span class='st'>"Mean BD 2016"</span>, <span class='st'>"Mean Dem Vote 2016"</span>, <span class='st'>"Mean BD 2020"</span>, <span class='st'>"Mean Dem Vote 2020"</span><span class='op'>)</span>, digits <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></span></code></pre>
+</div>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 19%" />
+<col style="width: 13%" />
+<col style="width: 19%" />
+<col style="width: 13%" />
+<col style="width: 19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Mean BD 2012</th>
+<th style="text-align: right;">Mean Dem Vote 2012</th>
+<th style="text-align: right;">Mean BD 2016</th>
+<th style="text-align: right;">Mean Dem Vote 2016</th>
+<th style="text-align: right;">Mean BD 2020</th>
+<th style="text-align: right;">Mean Dem Vote 2020</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">12.19</td>
+<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">13.35</td>
+<td style="text-align: right;">0.36</td>
+<td style="text-align: right;">14.84</td>
+<td style="text-align: right;">0.38</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="data-comparison-analysis">Data Comparison Analysis</h3>
+<p>My research question is: How do the current state education statistics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels determine which party is expected to win in a swing state. More education leads to Democratic victory.</p>
+<p>Data on education and democratic vote shares from the 2012, 2016, and 2020 elections</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

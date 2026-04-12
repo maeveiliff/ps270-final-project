@@ -16,13 +16,13 @@ I am interested in exploring data related to swing and battleground states. I am
 
 ## Research Proposal 
 
-My research question is: How do the current state demographics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels, racial demographics, and geographic changes/movement determine which party is expected to win in a swing state. More education, diversity, and urbanization leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates), percent/number of non-white voters in the state, and distribution of populations is urban and rural areas. I want to look at the variation and how they have changed in comparison to which party won the state's electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.  
+My research question is: How do the current state education statistics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels determine which party is expected to win in a swing state. More education leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates). I want to look at the variation and how they have changed in comparison to which party won the state's electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.  
 
 
 ## Code for Data to be Used in Project
 
 
-I installed the tidycensus package to get the data for education, racial demography, and urbanization to compare across US censuses
+I installed the tidycensus package to get the data for education to compare across US censuses
 
 ```{r}
 library(tidycensus)
@@ -73,17 +73,17 @@ ls("package:tidycensus")
 acs_variables2020 <- load_variables(2020, "acs5")
 head(acs_variables2020)
 
-education <- get_acs(
+education_2020 <- get_acs(
   geography = "county", 
   state = swing_states, 
   variables = "B15003_022", 
   year = 2020)
 
 
-education$county_name <- gsub(" County,.*", "", education$NAME)
-education$county_name <- toupper(education$county_name)
+education_2020$county_name <- gsub(" County,.*", "", education_2020$NAME)
+education_2020$county_name <- toupper(education_2020$county_name)
 
-swing2020_education <- merge(swing_2020, education, by = "county_name")
+swing2020_education <- merge(swing_2020, education_2020, by = "county_name")
 
 
 ```
@@ -97,7 +97,7 @@ Lastly, I created a scatterplot to showcase my data to find a correlation betwee
 
 swing2020_education_plot <- ggplot(swing2020_education, aes(x = estimate /1000, y = demvoteshare, color = state_po)) +
   geom_point(size = 1, alpha = 0.5) +
-  geom_smooth(method = "lm", se= FALSE, color = "red") +
+  geom_smooth(method = "lm", se= FALSE, color = "blue") +
   scale_x_log10() +
   labs(
     x = "Number of Bachelor Degree Graduates in the Thousands", 
@@ -112,12 +112,137 @@ swing2020_education_plot
 
 ```
 
+### AI Disclosure Statement
 
-## AI Disclosure Statement 
-
-I used ChatGPT a couple times to create this data visualization. In my second chunk of code in focusing on the education variable, I was confused how to use the tidycensus library and all that code, so I inputed in to ChatGPT to ask to read it to find the names of data I wanted to use (for example that the average education is called estimate) because tidycensus takes data from the US census website so it is accissible that way. I looked up questions like "how to match my election data to the county data" and ChatGPT told me to use gsub and toupper, which I hadn't heard of before. I also asked it how to see the functions within the tidycensus library and it showed me the head() function and to use asc5 and to narrow down on 2020 and other variables specific to the census data. 
-
+I used ChatGPT a couple times to create this data visualization. In my second chunk of code in focusing on the education variable, I was confused how to use the tidycensus library and all that code, so I inputed in to ChatGPT to ask to read it to find the names of data I wanted to use (for example that the average education is called estimate) because tidycensus takes data from the US census website so it is accissible that way. I looked up questions like “how to match my election data to the county data” and ChatGPT told me to use gsub and toupper, which I hadn’t heard of before. I also asked it how to see the functions within the tidycensus library and it showed me the head() function and to use asc5 and to narrow down on 2020 and other variables specific to the census data.
 
 
+## Data Comparison and Analysis for Milestone 4
 
+### Data Visualization Comparisons
+
+Next, I will compare the education and democratic vote share in swing states to 2016 data, when a republic president (Donald Trump) was elected by doing the exact steps I followed to create my data visualization for 2020.
+
+```{r}
+
+swing_2016 <- prescountydata |>
+  filter(state_po %in% swing_states, year == 2016)
+
+swing_2016 <- swing_2016 |>
+  group_by(state_po, county_name) |>
+  mutate(demvotes = sum(if_else(party == "DEMOCRAT", candidatevotes, 0))) |>
+  mutate(demvoteshare = demvotes / totalvotes)
+
+
+acs_variables2016 <- load_variables(2016, "acs5")
+head(acs_variables2016)
+
+education_2016 <- get_acs(
+  geography = "county", 
+  state = swing_states, 
+  variables = "B15003_022", 
+  year = 2016)
+
+
+education_2016$county_name <- gsub(" County,.*", "", education_2016$NAME)
+education_2016$county_name <- toupper(education_2016$county_name)
+
+swing2016_education <- merge(swing_2016, education_2016, by = "county_name")
+
+
+swing2016_education_plot <- ggplot(swing2016_education, aes(x = estimate /1000, y = demvoteshare, color = state_po)) +
+  geom_point(size = 1, alpha = 0.5) +
+  geom_smooth(method = "lm", se= FALSE, color = "blue") +
+  scale_x_log10() +
+  labs(
+    x = "Number of Bachelor Degree Graduates in the Thousands", 
+    y = "Democratic Vote Share", 
+    title = "Education and Democratic Vote Share in Swing States (2016)", 
+    color = "Swing State"
+  )
+
+swing2016_education_plot
+
+
+```
+
+Then, I will do the same thing, but in 2012 when Barack Obama, the democratic candidate, was elected. 
+
+```{r}
+
+swing_2012 <- prescountydata |>
+  filter(state_po %in% swing_states, year == 2012)
+
+swing_2012 <- swing_2012 |>
+  group_by(state_po, county_name) |>
+  mutate(demvotes = sum(if_else(party == "DEMOCRAT", candidatevotes, 0))) |>
+  mutate(demvoteshare = demvotes / totalvotes)
+
+
+acs_variables2012 <- load_variables(2012, "acs5")
+head(acs_variables2012)
+
+education_2012 <- get_acs(
+  geography = "county", 
+  state = swing_states, 
+  variables = "B15003_022", 
+  year = 2012)
+
+
+education_2012$county_name <- gsub(" County,.*", "", education_2012$NAME)
+education_2012$county_name <- toupper(education_2012$county_name)
+
+swing2012_education <- merge(swing_2012, education_2012, by = "county_name")
+
+
+swing2012_education_plot <- ggplot(swing2012_education, aes(x = estimate /1000, y = demvoteshare, color = state_po)) +
+  geom_point(size = 1, alpha = 0.5) +
+  geom_smooth(method = "lm", se= FALSE, color = "blue") +
+  scale_x_log10() +
+  labs(
+    x = "Number of Bachelor Degree Graduates in the Thousands", 
+    y = "Democratic Vote Share", 
+    title = "Education and Democratic Vote Share in Swing States (2012)", 
+    color = "Swing State"
+  )
+
+swing2012_education_plot
+
+
+```
+
+
+Next, I put all this data used for the scatterplots into a table with the average numbers of bachelor degrees and average democratic vote shares in the swing states for each election year. 
+
+```{r}
+
+avgs_2012 <- swing2012_education |>
+  summarize(avg_bd2012 = mean(estimate / 1000, na.rm = TRUE),
+            avg_demvotes2012 = mean(demvoteshare, na.rm = TRUE))
+
+avgs_2016 <- swing2016_education |>
+  summarize(avg_bd2016 = mean(estimate / 1000, na.rm = TRUE), 
+            avg_demvotes2016 = mean(demvoteshare, na.rm = TRUE))
+
+avgs_2020 <- swing2020_education |>
+  summarize(avg_bd2020 = mean(estimate / 1000, na.rm = TRUE), 
+            avg_demvotes2020 = mean(demvoteshare, na.rm = TRUE))
+
+avg_table_final <- bind_cols(
+  `2012` = avgs_2012, `2016` = avgs_2016, `2020` = avgs_2020)
+
+knitr::kable(avg_table_final, col.names = c("Mean BD 2012", "Mean Dem Vote 2012", "Mean BD 2016", "Mean Dem Vote 2016", "Mean BD 2020", "Mean Dem Vote 2020"), digits = 2)
+
+
+
+
+```
+
+
+### Data Comparison Analysis
+
+
+My research question is: How do the current state education statistics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels determine which party is expected to win in a swing state. More education leads to Democratic victory.
+
+Data on education and democratic vote shares from the 2012, 2016, and 2020 elections
 
