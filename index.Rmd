@@ -241,8 +241,5 @@ knitr::kable(avg_table_final, col.names = c("Mean BD 2012", "Mean Dem Vote 2012"
 
 ### Data Comparison Analysis
 
-
-My research question is: How do the current state education statistics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels determine which party is expected to win in a swing state. More education leads to Democratic victory.
-
-Data on education and democratic vote shares from the 2012, 2016, and 2020 elections
+Data on education and democratic vote shares from the 2012, 2016, and 2020 elections show that as years have progressed the rate of bachelor degrees as gone up. But, there is no correlation seen in these swing states with education changes in election years contributing to an increase in democratic votes. Meaning, as education has increased, that hasn't necessarily meant that people have start voted more democratically. For example, in 2012 when Obama won the election, the democratic vote share was 0.42. Yet, as education increased in 2016, the democratic vote share was only 0.36. Thus, even as education increased in swing states, it did not necessarily cause more democratic votes, as Donald Trump also won the election is many of these battleground states. Thus, an increase education does not have an overarching effect of democratic votes because even as it increased, majority of people voted for the republican candidate. 
 
