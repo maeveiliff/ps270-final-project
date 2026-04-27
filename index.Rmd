@@ -9,6 +9,8 @@ output:
 
 
 
+
+
 ## Project thoughts
 
 I am interested in exploring data related to swing and battleground states. I am from Minnesota, which is the longest-standing "blue" state since 1976. But now I live in a key swing state- Wisconsin being a huge factor in presidential election victories. I want to look into data about what factors leads states to swing certain ways and how it changes across elections. I would like to look into candidate's platforms over the recent presidential elections, as well as geographic and demographic elements as well. Ultimately, the goal of the final project would be to get some sort of insight into what factors contribute to battleground states voting the way they do depending on the election year. 
@@ -35,7 +37,7 @@ Then I loaded data about voting by county to compare with my census data
 
 library(tidyverse)
 
-prescountydata <- read_csv("data/countypres_2000-2024.csv")
+prescountydata <- read_csv("data/countypres_2000-2024.csv") 
 
 prescountydata
 
@@ -153,7 +155,7 @@ swing2016_education <- merge(swing_2016, education_2016, by = "county_name")
 swing2016_education_plot <- ggplot(swing2016_education, aes(x = estimate /1000, y = demvoteshare, color = state_po)) +
   geom_point(size = 1, alpha = 0.5) +
   geom_smooth(method = "lm", se= FALSE, color = "blue") +
-  scale_x_log10() +
+  scale_x_log10() + 
   labs(
     x = "Number of Bachelor Degree Graduates in the Thousands", 
     y = "Democratic Vote Share", 
@@ -161,7 +163,7 @@ swing2016_education_plot <- ggplot(swing2016_education, aes(x = estimate /1000, 
     color = "Swing State"
   )
 
-swing2016_education_plot
+swing2016_education_plot 
 
 
 ```
