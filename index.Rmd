@@ -1,102 +1,79 @@
 ---
-title: "PS270 Final Project"
+title: "Political Science 270 Final Project: Education and Democratic Vote Share"
 author: "Maeve Iliff"
-description: "My final project"
+description: "A look to see if the college education levels dictate Democratic vote share in essential swing states."
 output:
   distill::distill_article:
     self_contained: false
 ---
 
 
+## Introduction
 
+### Initial project thoughts
 
+At the start of my project, I began brainstorming potential topics and ideas to research. Eventually, I came to the conclusion that I am interested in exploring data related to swing and battleground states. I am from Minnesota, which is the longest-standing "blue" state since 1976. But now I live in a key swing state- Wisconsin being a huge factor in presidential election victories. I want to look into data about what factors leads states to swing certain ways and how it changes across elections. I would like to look into education levels in swing states to dictate if how a state votes is based on the fluctuation and current education levels of the election year. The modern realignment theory has also help drive my thinking and research. Ultimately, the goal of the final project would be to get some sort of insight into if education contributes to battleground states voting the way they do depending on the election year.
 
-## Project thoughts
+### Research question
 
-I am interested in exploring data related to swing and battleground states. I am from Minnesota, which is the longest-standing "blue" state since 1976. But now I live in a key swing state- Wisconsin being a huge factor in presidential election victories. I want to look into data about what factors leads states to swing certain ways and how it changes across elections. I would like to look into candidate's platforms over the recent presidential elections, as well as geographic and demographic elements as well. Ultimately, the goal of the final project would be to get some sort of insight into what factors contribute to battleground states voting the way they do depending on the election year. 
+Eventually, I came to the research question: Do the current education levels--and fluctuation across election years--in swing states effect the Democratic vote share? This question is important because it will aim to identify a root cause in how people cast their vote and what factors lead someone to vote either Republican or Democratic. I want to know if people with bachelor degrees are more inclined to vote for the Democratic nominee. I will use this question to drive my hypothesis, research, and data analysis. 
 
+### My hypothesis
 
-## Research Proposal 
+I came to this hypothesis: **There is a positive association between education and the Democratic vote share in swing state counties. Meaning, the counties with a higher amount of bachelor degree earners will see more votes for the presidential Democrat nominee.** My hypothesis is important because it will serve as the foundation of my experiment. It will guide the data, models, and statistics I find and use to answer my research question and determine the validity of my hypothesis. My hypothesis is also important to the real world because swing states determine which party nominee wins the presidential election, thus it is important to determine which factors cause voters in purple state counties to vote the way they do. Pin-pointing voting determinations is essential to understanding more about the people that makeup our democracy. It was interesting to understand more about what factors affect the way people cast their votes and what party they align with. In a democracy, voting is essential in creating our government makeup and framework, thus I urge everyone to find interest in determining what factors influece the way citizens of swing states vote. 
 
-My research question is: How do the current state education statistics- and the fluctuation between election years- relate to which president and party key battleground state constituents cast their vote to? My hypothesis is that changes in education levels determine which party is expected to win in a swing state. More education leads to Democratic victory.This is rooted in the modern realignment theory, which is the idea that shifts in voter allegiance shifts based on cultural and economic issues. My explanatory variables of interest are education levels (college graduates). I want to look at the variation and how they have changed in comparison to which party won the state's electoral college votes. My outcome variable will be the percentage of Democrat votes that given election year. To prove my hypothesis I would need to see positive change in regard to the variables in the same election cycle that the Democrat nominee won the presidency.  
+## Project Data
 
-
-## Code for Data to be Used in Project
-
-
-I installed the tidycensus package to get the data for education to compare across US censuses
-
-```{r}
+```{r, echo = FALSE}
+## I installed the tidycensus package to get the data for education to compare across US censuses
 library(tidycensus)
 ```
 
-
-Then I loaded data about voting by county to compare with my census data 
-
-```{r}
-
+```{r, echo = FALSE}
+## Then I loaded data about voting by county to compare with my census data 
 library(tidyverse)
-
 prescountydata <- read_csv("data/countypres_2000-2024.csv") 
-
-prescountydata
-
-glimpse(prescountydata)
-
 ```
 
+In order to conduct my research and test my hypothesis, I used census education data and past election voting data I found from two separate packages. First, I installed and loaded the **tidycensus** package. This package has new functions, information, findings on education across all states; this data comes from US Census (ACS) findings. Secondly, I installed data about presidential voting in all US counties from the past 25 years. This was found in the Harvard Dataverse and was loaded and read using **read_csv("data/countypres_2000-2024.csv")**. Here, I was able to find how each county voted for president since 2000.
 
+My explanatory variable of interest is education levels, thus I used the number of bachelor degrees reported in the census to conduct my research. My outcome variable will then be the percentage of votes for the Democrat party's presidential nominee. These two variables will be compared to determine if my hypothesis is correct or not; if my hypothesis is correct, I will see more Democratic votes among the more educated swing state counties. For this project, I used data from 2012, 2016, and 2020, comparing education and how swing state voters casted their ballots in said election year.
 
-## Data Visualization for Milestone 3
+My independent variable or predictor is: *education* or bachelor degree earners (B15003_022 in the ACS package) in a given swing state and the election year. My dependent variable or outcome is: *Democratic vote share* (which will be calculated by dividing the Democrat votes by the total vote share). This is because I am using the education level of a given election year to measure the amount of Democrat votes to find correlation. Thus, I am testing to see if education influences voting behavior. I will measure and test these variables using survey-based data and voting data; I have administrative election returns data and census survey data at a county level. Then, I used coding to combine and use both data sets to test my hypothesis. Meaning, through grouping, mutating, plotting, and more through code, I was able to use two separate pieces of data to answer my research question. My research design is *cross sectional* because I am analyzing data and observations from specific populations at certain points in time. For example, I am looking a swing state county voters with bachelor degrees to determine how they voted in the 2012, 2016, and 2020 elections.This snapshot can then serve as an illumination on voting trends for swing states in other election years as well to determine and overall trend. *Please view the bottom of this website for a full rundown and view of my coding.* I will know whether my hypothesis can be supported or rejected if I find that as the amount of bachelor degrees in a county also leads to a higher Democratic vote share for that county. 
 
-I created a variable for all the swing states: Wisconsin, Michigan, Pennsylvania, Arizona, Georgia, Nevada, and North Carolina. Then I filtered into to data from swing states just in the year 2020. Lastly I filtered the 2020 swing state variable for democrat votes to be able to find the percentage of democrat votes in the total votes to use later in my data visualization. 
+The histogram below  takes all of the data in both sets to showcase the distribution of the Democratic vote share across swing state counties. The y-axis is the number of swing state election observations while the x-axis is the actual vote share (the higher the value, the more Democratic). Meaning, this histogram to show the average percentage of votes for the Democratic party across the swing state counties. Majority of the counties fall between 0.0 to 0.50, showcasing that on average the Democrat nominee receives less that 50% of the total votes. However, there is still a decent spread that falls above 50%. This distribution serves as a basis for my research and hypothesis. The Democratic vote share across swing state counties will now be further analyzed to determine if the counties that surpass 50% of their total votes for the Democratic party are, in turn, generally more educated. 
 
-```{r}
-
+```{r, echo = FALSE}
 swing_states <- c("WI", "MI", "PA", "AZ", "GA", "NV", "NC")
+ggplot(prescountydata |> filter(state_po %in% swing_states, party == "DEMOCRAT"), aes(x = candidatevotes / totalvotes)) + geom_histogram(bins = 15) + labs(x = "Democratic Vote Share", y = "Swing State Counties", title = "Democratic Vote Share Across Swing State Counties")
+```
 
+## Results
+
+### Scatterplots
+
+I created three scatterplots to determine the correlation between education/bachelor degree levels and Democratic vote share for the 2020, 2016, and 2012 election years. *Please use the three scatterplots below and their lines of linear regression to further interpret and analyze my data and hypothesis*
+
+```{r, echo = FALSE}
+## I created a variable for all the swing states: Wisconsin, Michigan, Pennsylvania, Arizona, Georgia, Nevada, and North Carolina. Then I filtered into to data from swing states just in the year 2020. Lastly I filtered the 2020 swing state variable for Democrat votes to be able to find the percentage of Democrat votes in the total votes to use later in my data visualization.
 swing_2020 <- prescountydata |>
   filter(state_po %in% swing_states, year == 2020)
-
 swing_2020 <- swing_2020 |>
   group_by(state_po, county_name) |>
   mutate(demvotes = sum(if_else(party == "DEMOCRAT", candidatevotes, 0))) |>
   mutate(demvoteshare = demvotes / totalvotes)
-
-```
-
-I looked into my tidycensus package to see all the avaliable functions within the package. I was able to use the get_acs() function to download data in each swing state county for people with a bachelor's degree (education) in 2020. Next, I matched county names to election data. Lastly, I needed to combine my swing_2020 variable data with the education data I just created and make sure everything was filtered by county for a more percise data visualization. 
-
-```{r}
-
+## I looked into my tidycensus package to see all the avaliable functions within the package. I was able to use the get_acs() function to download data in each swing state county for people with a bachelor's degree (education) in 2020. Next, I matched county names to election data. Lastly, I needed to combine my swing_2020 variable data with the education data I just created and make sure everything was filtered by county for a more percise data visualization. 
 library(tidycensus)
-ls("package:tidycensus")
-
 acs_variables2020 <- load_variables(2020, "acs5")
-head(acs_variables2020)
-
 education_2020 <- get_acs(
   geography = "county", 
   state = swing_states, 
   variables = "B15003_022", 
   year = 2020)
-
-
 education_2020$county_name <- gsub(" County,.*", "", education_2020$NAME)
 education_2020$county_name <- toupper(education_2020$county_name)
-
 swing2020_education <- merge(swing_2020, education_2020, by = "county_name")
-
-
-```
-
-
-
-Lastly, I created a scatterplot to showcase my data to find a correlation between education and democratic votes in the counties of swing states. 
-
-
-```{r}
-
+## Lastly, I created a scatterplot to showcase my data to find a correlation between education and Democratic votes in the counties of swing states.
 swing2020_education_plot <- ggplot(swing2020_education, aes(x = estimate /1000, y = demvoteshare, color = state_po)) +
   geom_point(size = 1, alpha = 0.5) +
   geom_smooth(method = "lm", se= FALSE, color = "blue") +
@@ -107,51 +84,26 @@ swing2020_education_plot <- ggplot(swing2020_education, aes(x = estimate /1000, 
     title = "Education and Democratic Vote Share in Swing States (2020)", 
     color = "Swing State"
   )
-
 swing2020_education_plot
-
-
-
 ```
 
-### AI Disclosure Statement
-
-I used ChatGPT a couple times to create this data visualization. In my second chunk of code in focusing on the education variable, I was confused how to use the tidycensus library and all that code, so I inputed in to ChatGPT to ask to read it to find the names of data I wanted to use (for example that the average education is called estimate) because tidycensus takes data from the US census website so it is accissible that way. I looked up questions like “how to match my election data to the county data” and ChatGPT told me to use gsub and toupper, which I hadn’t heard of before. I also asked it how to see the functions within the tidycensus library and it showed me the head() function and to use asc5 and to narrow down on 2020 and other variables specific to the census data.
-
-
-## Data Comparison and Analysis for Milestone 4
-
-### Data Visualization Comparisons
-
-Next, I will compare the education and democratic vote share in swing states to 2016 data, when a republic president (Donald Trump) was elected by doing the exact steps I followed to create my data visualization for 2020.
-
-```{r}
-
+```{r, echo = FALSE}
+## Next, I will compare the education and Democratic vote share in swing states to 2016 data, when a republic president (Donald Trump) was elected by doing the exact steps I followed to create my data visualization for 2020.
 swing_2016 <- prescountydata |>
   filter(state_po %in% swing_states, year == 2016)
-
 swing_2016 <- swing_2016 |>
   group_by(state_po, county_name) |>
   mutate(demvotes = sum(if_else(party == "DEMOCRAT", candidatevotes, 0))) |>
   mutate(demvoteshare = demvotes / totalvotes)
-
-
 acs_variables2016 <- load_variables(2016, "acs5")
-head(acs_variables2016)
-
 education_2016 <- get_acs(
   geography = "county", 
   state = swing_states, 
   variables = "B15003_022", 
   year = 2016)
-
-
 education_2016$county_name <- gsub(" County,.*", "", education_2016$NAME)
 education_2016$county_name <- toupper(education_2016$county_name)
-
 swing2016_education <- merge(swing_2016, education_2016, by = "county_name")
-
-
 swing2016_education_plot <- ggplot(swing2016_education, aes(x = estimate /1000, y = demvoteshare, color = state_po)) +
   geom_point(size = 1, alpha = 0.5) +
   geom_smooth(method = "lm", se= FALSE, color = "blue") +
@@ -162,41 +114,26 @@ swing2016_education_plot <- ggplot(swing2016_education, aes(x = estimate /1000, 
     title = "Education and Democratic Vote Share in Swing States (2016)", 
     color = "Swing State"
   )
-
 swing2016_education_plot 
-
-
 ```
 
-Then, I will do the same thing, but in 2012 when Barack Obama, the democratic candidate, was elected. 
-
-```{r}
-
+```{r, echo = FALSE}
+## Then, I will do the same thing, but in 2012 when Barack Obama, the Democratic candidate, was elected. 
 swing_2012 <- prescountydata |>
   filter(state_po %in% swing_states, year == 2012)
-
 swing_2012 <- swing_2012 |>
   group_by(state_po, county_name) |>
   mutate(demvotes = sum(if_else(party == "DEMOCRAT", candidatevotes, 0))) |>
   mutate(demvoteshare = demvotes / totalvotes)
-
-
 acs_variables2012 <- load_variables(2012, "acs5")
-head(acs_variables2012)
-
 education_2012 <- get_acs(
   geography = "county", 
   state = swing_states, 
   variables = "B15003_022", 
   year = 2012)
-
-
 education_2012$county_name <- gsub(" County,.*", "", education_2012$NAME)
 education_2012$county_name <- toupper(education_2012$county_name)
-
 swing2012_education <- merge(swing_2012, education_2012, by = "county_name")
-
-
 swing2012_education_plot <- ggplot(swing2012_education, aes(x = estimate /1000, y = demvoteshare, color = state_po)) +
   geom_point(size = 1, alpha = 0.5) +
   geom_smooth(method = "lm", se= FALSE, color = "blue") +
@@ -207,41 +144,91 @@ swing2012_education_plot <- ggplot(swing2012_education, aes(x = estimate /1000, 
     title = "Education and Democratic Vote Share in Swing States (2012)", 
     color = "Swing State"
   )
-
 swing2012_education_plot
-
-
 ```
 
+All three of these scatterplot show a *positive* relationship between education and Democratic votes. Meaning, the more educated a county is, the more likely it is to vote for the Democratic presidential nominee. Meaning, across these three presidential elections, education does correlate with Democratic voting. However, it is important to point out the strength of this relationship. There is a decent amount of scatter around the linear regression line. Meaning, there are data points with a wider spread and plenty of outliers that *weaken* the positive correlation. Ultimately, the points follow a general trend to show a positive relationship and correlation, but the data still has a decent amount of spread. Furthermore, from 2012 there is an seen increase in education and, in turn, an increase in Democrat votes. As the linear regression line shows an increase across election years from 2012 to 2020 through the steepening of the slope, meaning the predictor variable (education) has become more influential is driving the outcome (Democratic votes). Ultimately, the scatterplots above show the overall positive relationship between bachelor degrees and Democratic vote share across swing state counties, especially how it has changed across presidential election years. 
 
-Next, I put all this data used for the scatterplots into a table with the average numbers of bachelor degrees and average democratic vote shares in the swing states for each election year. 
+### Data table and confounders
 
-```{r}
+Next, I created a table of the average bachelor degrees (BD) in thousands and average Democratic vote share across the swing states to provide another visualize across the election years. 
 
+```{r, echo = FALSE}
+## Next, I put all this data used for the scatterplots into a table with the average numbers of bachelor degrees and average Democratic vote shares in the swing states for each election year. 
 avgs_2012 <- swing2012_education |>
   summarize(avg_bd2012 = mean(estimate / 1000, na.rm = TRUE),
             avg_demvotes2012 = mean(demvoteshare, na.rm = TRUE))
-
 avgs_2016 <- swing2016_education |>
   summarize(avg_bd2016 = mean(estimate / 1000, na.rm = TRUE), 
             avg_demvotes2016 = mean(demvoteshare, na.rm = TRUE))
-
 avgs_2020 <- swing2020_education |>
   summarize(avg_bd2020 = mean(estimate / 1000, na.rm = TRUE), 
             avg_demvotes2020 = mean(demvoteshare, na.rm = TRUE))
-
 avg_table_final <- bind_cols(
   `2012` = avgs_2012, `2016` = avgs_2016, `2020` = avgs_2020)
-
 knitr::kable(avg_table_final, col.names = c("Mean BD 2012", "Mean Dem Vote 2012", "Mean BD 2016", "Mean Dem Vote 2016", "Mean BD 2020", "Mean Dem Vote 2020"), digits = 2)
+```
 
+In this table, I have shown both the average number of people with bachelor degrees (divided by a thousand) per swing state county and the average percent of votes the average Democratic vote share (multiply by 100 to get the percent) in each swing state county. This table shows that there has been an increase in the average education in swing state counties from 2012 to 2020. However, there is fluctuation across the average Democratic vote shares in swing states from 2012 to 2016. I incorporated this table because it is important to address possible *confounders*. The first potential confounder I will address is that the approval ratings for the president (and thus the party they represent) goes down throughout the presidency because people blame them for the wrongdoings during their term. Thus, in 2016, the Democratic vote share could have gone down because people were upset with Obama and the Democratic party, so more people voted for the Republican or third party candidate.Another potential confounder in my research and observation is the presidential candidate also affects how people vote. In 2012, Mitt Romney and Barack Obama were the two candidates; however, in 2016 and 2020, Donald Trump was the Republican candidate running against Hillary Clinton and then Joe Biden. So, when only analyzing these three elections, it is hard to understand the full extent of Democratic vote shares because the same man was running in two of them. 
 
+Additionally, I think it is important to address that we may see a decrease and fluctuation across the democratic vote share because more people are voting, thus here is a confounder to the table of data that can disprove my research. Ultimately, addressing the confounders of this table can help provide stronger support for my hypothesis because there might be other reasons why the share is going down, and education still has an effect on Democratic vote share.  
 
+### Regression model
+
+```{r, echo = FALSE}
+reg2020 <- lm(demvoteshare ~ estimate, data = swing2020_education)
+reg2016 <- lm(demvoteshare ~ estimate, data = swing2016_education)
+reg2012 <- lm(demvoteshare ~ estimate, data = swing2012_education)
+
+modelsummary::modelsummary(list("2012" = reg2012,
+                                "2016" = reg2016,
+                                "2020" = reg2020), stars = TRUE, 
+                           title = "Education and Democratic Vote Share Regression", fmt = 6)
 
 ```
 
+#### *Key for regression table:*
+* Intercept = the Democratic vote share when education is 0
+* Estimate = the effect of education on Democratic vote share (when increases by 1)
+* Standard errors = the uncertainty of my research and estimate 
+* Num.Obs. = the number of county observations (data points) in the year's model 
+* R2: the variation in Democratic vote share
+* R2 Adj. = same as R2 but extra variables are penalized
+* AIC = compares model quality (lower = better)
+* BIC = similar to AIC but penalizes model complexity stronger (lower = better)
+* Log.Lik. = measure of how well the model fits the data
+* RMSE = the average size of prediction errors
 
-### Data Comparison Analysis
+#### Regression analysis
 
-Data on education and democratic vote shares from the 2012, 2016, and 2020 elections show that as years have progressed the rate of bachelor degrees as gone up. But, there is no correlation seen in these swing states with education changes in election years contributing to an increase in democratic votes. Meaning, as education has increased, that hasn't necessarily meant that people have start voted more democratically. For example, in 2012 when Obama won the election, the democratic vote share was 0.42. Yet, as education increased in 2016, the democratic vote share was only 0.36. Thus, even as education increased in swing states, it did not necessarily cause more democratic votes, as Donald Trump also won the election is many of these battleground states. Thus, an increase education does not have an overarching effect of democratic votes because even as it increased, majority of people voted for the republican candidate.
+The *main coefficient* of interest is **how an increase in education (bachelor degrees) changes/affects Democratic vote shares in swing states.** This coefficient and thus relationship is positive, and it is crucial for interpreting regression in each presidential election year. The estimated coefficients for each election year are **all statistically significant** because the p-values for each year (2012, 2016, and 2020) are 0.05 less. For each year the p-value is 0.000001--*as seen in the estimate row on the table above.* Additionally, the asterisks (***) that correlate with a p-value at the bottom are shown in estimate column to indicate the p-value is below 0.0001, which proves strong evidence, correlation, and significance. 
+
+There is *substantive meaning* of this regression, meaning it does have real-world, important effects.   
+
+## Conclusions
+
+### Overall summary of results
+
+Write here...
+
+### The null hypothesis 
+
+Write here...
+
+### Limitations to my research 
+
+Write here...
+
+### How I can improve my analysis in future work 
+
+Write here...
+
+## The Code in my Project
+
+```{r print-code, ref.label=knitr::all_labels(), echo = TRUE, eval=FALSE}
+```
+
+## AI Disclaimer
+
+I used ChatGPT a couple times to create this data visualization. In my second chunk of code in focusing on the education variable, I was confused how to use the tidycensus library and all that code, so I inputed in to ChatGPT to ask to read it to find the names of data I wanted to use (for example that the average education is called estimate) because tidycensus takes data from the US census website so it is accissible that way. I looked up questions like “how to match my election data to the county data” and ChatGPT told me to use gsub and toupper, which I hadn’t heard of before. I also asked it how to see the functions within the tidycensus library and it showed me the head() function and to use asc5 and to narrow down on 2020 and other variables specific to the census data.
 
